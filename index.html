@@ -2,10 +2,22 @@
 <html>
 <head>
 	<title>Why Page</title>
+	
+	<script src="https://fb.me/react-with-addons-0.13.3.min.js"></script>
+	<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 </head>
 <body>
-	Hello World
-	<b>Why</b>
-	<img src="react.jpg"></img>
+	<script type="text/jsx">
+		var Why = React.createClass({
+			render: function () {
+				return (
+					<div className="why">
+						Hello World
+					</div>
+				);
+			}
+		});
+		React.render(<Why />, document.body);
+	</script>
 </body>
 </html>
