@@ -4,20 +4,25 @@
 	<title>Why Page</title>
 	
 	<script src="https://fb.me/react-with-addons-0.13.3.min.js"></script>
-	<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 </head>
 <body>
-	<script type="text/jsx">
+	<script>
 		var Why = React.createClass({
+			displayName: "Why",
 			render: function () {
 				return (
-					<div className="why">
-						Hello World
-					</div>
+					React.createElement(
+						"div",
+						{className: "why"},
+						"Hello World"
+					)
 				);
 			}
 		});
-		React.render(<Why />, document.body);
+		React.render(
+			React.createElement(Why, null), 
+			document.body
+		);
 	</script>
 </body>
 </html>
