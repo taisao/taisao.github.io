@@ -7,3 +7,8 @@ var Why = React.createClass({
 		);
 	}
 });
+
+React.render(
+	<Why />,
+	document.body
+);
