@@ -4,25 +4,11 @@
 	<title>Why Page</title>
 	
 	<script src="react-with-addons-0.13.3.min.js"></script>
+	<script src="JSXTransformer-0.13.3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.2/react-with-addons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.2/JSXTransformer.js"></script>
 </head>
 <body>
-	<script>
-		var Why = React.createClass({
-			displayName: "Why",
-			render: function () {
-				return (
-					React.createElement(
-						"div",
-						{className: "why"},
-						"Hello World"
-					)
-				);
-			}
-		});
-		React.render(
-			React.createElement(Why, null), 
-			document.body
-		);
-	</script>
+	<script type="text/jsx" src="why.js"></script>
 </body>
 </html>
