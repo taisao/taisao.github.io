@@ -1,5 +1,3 @@
-var React = require('react/addons');
-
 var Why = React.createClass({
 	render: function () {
 		return (
