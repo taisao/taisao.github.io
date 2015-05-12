@@ -1,3 +1,5 @@
+var React = require('react');
+
 var Why = React.createClass({displayName: "Why",
 	render: function () {
 		return (
@@ -12,3 +14,5 @@ React.render(
 	React.createElement(Why, null),
 	document.body
 );
+
+React.create
