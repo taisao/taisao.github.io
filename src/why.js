@@ -1,6 +1,24 @@
+var BlogForm = React.createClass({
+    render: function () {
+        return (
+            <form class="blogForm">
+                <input type="text" ref="title" />
+                <textarea ref="content"></textarea>
+                <input type="submit" />
+            </form>
+        );
+    }
+});
+
 var Blog = React.createClass({
    render: function () {
-       var contentMarkup = marked(this.props.blog.content, {sanitize: true});
+       var contentSplit = this.props.blog.content.split("\n");
+       var contentMarkup = "";
+
+       for (i in contentSplit) {
+           contentMarkup += "<p>" + marked(contentSplit[i], {sanitize: false}) + "</p>";
+       }
+
        return (
            <div className="blog">
                <h2>{this.props.blog.title}</h2>
@@ -53,6 +71,7 @@ var Why = React.createClass({
 		return (
 			<div className="why">
 				<h1>Why Blog</h1>
+                <BlogForm />
                 <Blogs blogs={this.state.blogs} />
 			</div>
 		);
@@ -60,6 +79,6 @@ var Why = React.createClass({
 });
 
 React.render(
-	<Why url="data.json" />,
-	document.body
+	<Why url="http://my-aetitud.rhcloud.com/api/tee/" />,
+	document.getElementById("why")
 );

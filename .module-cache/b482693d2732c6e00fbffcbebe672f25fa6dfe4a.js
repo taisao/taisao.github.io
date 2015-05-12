@@ -79,6 +79,6 @@ var Why = React.createClass({displayName: "Why",
 });
 
 React.render(
-	React.createElement(Why, {url: "http://my-aetitud.rhcloud.com/api/tee/"}),
+	React.createElement(Why, {url: "data.json"}),
 	document.getElementById("why")
 );

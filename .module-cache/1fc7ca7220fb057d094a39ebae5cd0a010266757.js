@@ -1,15 +1,3 @@
-var BlogForm = React.createClass({displayName: "BlogForm",
-    render: function () {
-        return (
-            React.createElement("form", {class: "blogForm"}, 
-                React.createElement("input", {type: "text", ref: "title"}), 
-                React.createElement("textarea", {ref: "content"}), 
-                React.createElement("input", {type: "submit"})
-            )
-        );
-    }
-});
-
 var Blog = React.createClass({displayName: "Blog",
    render: function () {
        var contentSplit = this.props.blog.content.split("\n");
@@ -71,7 +59,6 @@ var Why = React.createClass({displayName: "Why",
 		return (
 			React.createElement("div", {className: "why"}, 
 				React.createElement("h1", null, "Why Blog"), 
-                React.createElement(BlogForm, null), 
                 React.createElement(Blogs, {blogs: this.state.blogs})
 			)
 		);
@@ -79,6 +66,6 @@ var Why = React.createClass({displayName: "Why",
 });
 
 React.render(
-	React.createElement(Why, {url: "http://my-aetitud.rhcloud.com/api/tee/"}),
+	React.createElement(Why, {url: "data.json"}),
 	document.getElementById("why")
 );

@@ -71,7 +71,6 @@ var Why = React.createClass({displayName: "Why",
 		return (
 			React.createElement("div", {className: "why"}, 
 				React.createElement("h1", null, "Why Blog"), 
-                React.createElement(BlogForm, null), 
                 React.createElement(Blogs, {blogs: this.state.blogs})
 			)
 		);
@@ -79,6 +78,6 @@ var Why = React.createClass({displayName: "Why",
 });
 
 React.render(
-	React.createElement(Why, {url: "http://my-aetitud.rhcloud.com/api/tee/"}),
+	React.createElement(Why, {url: "data.json"}),
 	document.getElementById("why")
 );
