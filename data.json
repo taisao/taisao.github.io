@@ -1,0 +1,69 @@
+[
+    {
+        "title": "test",
+        "content": "test",
+        "date": "151205"
+    },
+    {
+        "title": "Tại sao một số thuộc tính trong CSS3 phải thêm Vendor prefixes như -moz-, -webkit, -o-, -ms- ?",
+        "content": "\
+# Vendor prefix là gì?\
+Chắc không ít lần bạn gặp phải các trường hợp khai báo như thế này trong CSS3:\
+\
+```css\
+li {\
+  -webkit-transition-duration: 0.2s;\
+  -moz-transition-duration: 0.2s;\
+  -o-transition-duration: 0.2s;\
+  transition: 0.2s;\
+}\
+```\
+\
+Vendor prefix là tiền tố được thêm vào bởi nhà cung cấp trình duyệt:\
+> **-moz-**: Mozilla Firefox\
+> **-webkit-**: Google Chrome, Apple Safari\
+> **-o-**: Opera\
+> **-ms**-: Microsoft Internet Explorer\
+\
+# Tại sao lại có vendor prefixes?\
+\
+Bạn cần phải khai báo 2 hoặc nhiều lần cho chỉ một thuộc tính. Điều này đôi lúc thực sự khó chịu và bạn thắc mắc tại sao mình phải làm như vậy?\
+\
+Điều này thực chất là do CSS3 chưa hoàn chỉnh, một số thuộc tính hiện tại chỉ là bản draft, chưa được W3C công nhận là chuẩn chính thức và có thể sẽ có sự thay đổi trong tương lai như transition, box-sizing, background-size...\
+\
+Và các vendors thêm prefix của riêng họ vào trước thuộc tính cho quá trình thử nghiệm, để sau này nếu có sự thay đổi ở bản chính thức thì các website được viết trước đó cũng không bị ảnh hưởng.\
+\
+# Tại sao lại cần thêm prefix trong quá trình thử nghiệm?\
+\
+Giả sử Opera đang phát triển một thuộc tính mới là **polygon** để vẽ đa giác, họ thêm prefix **-o-** cho phiên bản này:\
+> -o-polygon: “six”;\
+> polygon: “six”;\
+> /* Opera 4 */\
+\
+Cùng thời điểm đó Mozilla cũng phát triển một thuộc tính **polygon** với mục đich tương tự nhưng lại có khai báo khác và không sử dụng prefix:\
+> polygon: “hexagon”;  /* Firefox 9 */\
+\
+Và một developer phát triển ứng dụng khai báo như sau:\
+> -o-polygon: “six”;  /* Opera */\
+> polygon: “hexagon”;  /* Mozilla */\
+\
+Sau đó, W3C công nhận thuộc tính này tiêu chuẩn chính thức và khai báo tương tự như:\
+> polygon: 6;\
+\
+Sau đó, Opera cập nhật thuộc tính tiêu chuẩn này ở phiên bản tiếp theo và vẫn giữ thuộc tính cũ:\
+> -o-polygon: “six”;\
+> polygon: 6;\
+> /* Opera 5 */\
+\
+Còn Mozilla cập nhật phiên bản mới:\
+> polygon: 6;  /* Firefox 10 */\
+\
+Như vậy, ứng dụng mà developer ở trên viết vẫn hoạt động đúng ở phiên bản Opera mới, tuy nhiên không còn hoạt động ở phiên bản Firefox mới nữa. Do đó, các vendors buộc phải thêm prefix cho các thuộc tính đang thử nghiệm.\
+\
+# Kết luận\
+Khi có 2 hoặc nhiều hơn vendor công nhận một thuộc tính thì cuối cùng nó sẽ trở thành tiêu chuẩn. Tuy nhiên quá trình công nhận một thuộc tính mới có thể mất nhiều năm. Hi vọng trong thời gian tới các vendors sẽ hợp tác chặt chẽ với nhau, nghĩ ra một cách nào đó khi đưa ra một thuộc tính mới để chúng ta không còn phải khai báo thuộc tính như thế này nữa.\
+\
+Còn hiện tại thì chúng ta vẫn phải chấp nhận nó, và sau khi hiểu được điều này, có thể bạn sẽ cảm thấy dễ chịu hơn khi phải sử dụng vendor prefixes.",
+        "date": "150508"
+    }
+]

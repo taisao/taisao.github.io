@@ -1,31 +1,28 @@
-var Blog = React.createClass({
+var Blog = React.createClass({displayName: "Blog",
    render: function () {
-       var contentMarkup = marked(this.props.blog.content, {sanitize: true});
-       return (
-           <div className="blog">
-               <h2>{this.props.blog.title}</h2>
-               <span dangerouslySetInnerHTML={{__html: contentMarkup}}></span>
-           </div>
-       );
+       React.createElement("div", {className: "blog"}, 
+           React.createElement("h2", null, this.props.blog.title), 
+           this.props.blog.content
+       )
    }
 });
 
-var Blogs = React.createClass({
+var Blogs = React.createClass({displayName: "Blogs",
     render: function () {
         var blogs = this.props.blogs.map(function (blog) {
             return (
-                <Blog blog={blog} />
+                React.createElement("div", {className: "blogs"}, 
+                    React.createElement(Blog, {blog: blog})
+                )
             );
         });
         return (
-            <div className="blogs">
-                {blogs}
-            </div>
+            {blogs}
         );
     }
 });
 
-var Why = React.createClass({
+var Why = React.createClass({displayName: "Why",
     getInitialState: function () {
         return {
             blogs: []
@@ -51,15 +48,15 @@ var Why = React.createClass({
     },
 	render: function () {
 		return (
-			<div className="why">
-				<h1>Why Blog</h1>
-                <Blogs blogs={this.state.blogs} />
-			</div>
+			React.createElement("div", {className: "why"}, 
+				React.createElement("h1", null, "Why Blog"), 
+                React.createElement(Blogs, {blogs: this.state.blogs})
+			)
 		);
 	}
 });
 
 React.render(
-	<Why url="data.json" />,
+	React.createElement(Why, {url: "data.json"}),
 	document.body
 );
