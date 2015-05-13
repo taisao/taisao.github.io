@@ -1,4 +1,28 @@
+var BlogMarked = React.createClass({
+    render: function () {
+        var contentSplit = this.props.content.split("\n");
+        var lines = contentSplit.map(function(line) {
+            if (line) {
+                return <span dangerouslySetInnerHTML={{__html: marked(line, {sanitized: false})}}></span>;
+            } else {
+                return <br />;
+            }
+
+        });
+
+        return (
+            <div className="blogMarked">
+                {lines}
+            </div>
+        );
+    }
+});
+
 var BlogForm = React.createClass({
+    handleChange: function (e) {
+        var content = e.target.value;
+        this.props.handleBlogFromChange(content);
+    },
     render: function () {
         return (
             <form className="blogForm">
@@ -6,7 +30,7 @@ var BlogForm = React.createClass({
                     <input className="form-control" type="text" ref="title" placeholder="Why?" />
                 </div>
                 <div className="form-group">
-                    <textarea className="form-control" ref="content" placeholder="Explanation"></textarea>
+                    <textarea className="form-control" ref="content" placeholder="Explanation (Markdown)" onChange={this.handleChange}></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Say</button>
             </form>
@@ -27,14 +51,14 @@ var Blog = React.createClass({
        }
 
        return (
-           <div className="blog" onClick={this.handleClick}>
+           <div className="blog">
                {this.props.blog.contentState ?
-                   <div className="title active" >
+                   <div className="title active" onClick={this.handleClick}>
                        <b className="pull-left">{this.props.blog.title}</b>
                        <img src="static/img/up.png" className="pull-right" />
                    </div>
                    :
-                   <div className="title" >
+                   <div className="title" onClick={this.handleClick}>
                        <b className="pull-left">{this.props.blog.title}</b>
                        <img src="static/img/down.png" className="pull-right" />
                    </div>
@@ -74,9 +98,15 @@ var Why = React.createClass({
             blogs: this.state.blogs
         });
     },
+    handleBlogFromChange: function(content) {
+        this.setState({
+            content: content
+        });
+    },
     getInitialState: function () {
         return {
-            blogs: []
+            blogs: [],
+            content: ''
         };
     },
     getDataFromServer: function () {
@@ -106,7 +136,8 @@ var Why = React.createClass({
 			<div className="why">
 				<h1>WHY BLOG</h1>
                 <hr />
-                <BlogForm />
+                <BlogForm handleBlogFromChange={this.handleBlogFromChange}/>
+                {this.state.content ? <BlogMarked content={this.state.content} /> : null}
                 <Blogs blogs={this.state.blogs} hanldeBlogClick={this.hanldeBlogClick} />
 			</div>
 		);

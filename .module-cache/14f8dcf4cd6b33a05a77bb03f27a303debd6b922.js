@@ -2,12 +2,7 @@ var BlogMarked = React.createClass({displayName: "BlogMarked",
     render: function () {
         var contentSplit = this.props.content.split("\n");
         var lines = contentSplit.map(function(line) {
-            if (line) {
-                return React.createElement("span", {dangerouslySetInnerHTML: {__html: marked(line, {sanitized: false})}});
-            } else {
-                return React.createElement("br", null);
-            }
-
+            return React.createElement("p", {dangerouslySetInnerHTML: {__html: makerd(line, {sanitized: false})}});
         });
 
         return (
@@ -30,7 +25,7 @@ var BlogForm = React.createClass({displayName: "BlogForm",
                     React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?"})
                 ), 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", onChange: this.handleChange})
+                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation", onChange: this.handleChange})
                 ), 
                 React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
             )
@@ -106,7 +101,7 @@ var Why = React.createClass({displayName: "Why",
     getInitialState: function () {
         return {
             blogs: [],
-            content: ''
+            content: 'sad'
         };
     },
     getDataFromServer: function () {
@@ -137,7 +132,7 @@ var Why = React.createClass({displayName: "Why",
 				React.createElement("h1", null, "WHY BLOG"), 
                 React.createElement("hr", null), 
                 React.createElement(BlogForm, {handleBlogFromChange: this.handleBlogFromChange}), 
-                this.state.content ? React.createElement(BlogMarked, {content: this.state.content}) : null, 
+                React.createElement(BlogMarked, {content: this.state.content}), 
                 React.createElement(Blogs, {blogs: this.state.blogs, hanldeBlogClick: this.hanldeBlogClick})
 			)
 		);

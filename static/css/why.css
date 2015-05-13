@@ -11,15 +11,11 @@ body {
 
 .container {
     width: 800px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 hr {
     border-color: #404040;
-}
-
-b::selection {
-    background: none;
 }
 
 h1 {
@@ -33,6 +29,10 @@ h2 {
     font-weight: bold;
 }
 
+.blogMarked img {
+    width: 100%;
+}
+
 .blogs {
     margin-top: 20px;
 }
@@ -43,6 +43,7 @@ h2 {
     height: 60px;
     padding: 20px;
     border-bottom: 1px solid lightsteelblue;
+    text-transform: uppercase;
 }
 
 .title:hover {
@@ -50,6 +51,25 @@ h2 {
     cursor: pointer;
 }
 
+.title *::selection {
+    background: none;
+}
+
 .active {
     background-color: lightgreen;
+}
+
+.content {
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.blogMarked {
+    border: 1px solid lightsteelblue;
+    background-color: #f7f7f7;
+    margin-top: 20px;
+    padding: 20px;
 }

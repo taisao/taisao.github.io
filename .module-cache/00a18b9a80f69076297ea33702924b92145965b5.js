@@ -30,7 +30,7 @@ var BlogForm = React.createClass({displayName: "BlogForm",
                     React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?"})
                 ), 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", onChange: this.handleChange})
+                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation", onChange: this.handleChange})
                 ), 
                 React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
             )

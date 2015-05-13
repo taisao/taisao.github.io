@@ -1,36 +1,26 @@
 var BlogMarked = React.createClass({displayName: "BlogMarked",
     render: function () {
-        var contentSplit = this.props.content.split("\n");
-        var lines = contentSplit.map(function(line) {
-            if (line) {
-                return React.createElement("span", {dangerouslySetInnerHTML: {__html: marked(line, {sanitized: false})}});
-            } else {
-                return React.createElement("br", null);
-            }
-
-        });
-
+        var content = marked(this.props.content, {sanitize: true});
         return (
             React.createElement("div", {className: "blogMarked"}, 
-                lines
+                React.createElement("span", {dangerouslyInnerHTML: {__html: content}})
             )
         );
     }
 });
 
 var BlogForm = React.createClass({displayName: "BlogForm",
-    handleChange: function (e) {
-        var content = e.target.value;
-        this.props.handleBlogFromChange(content);
+    handleChange: function () {
+
     },
     render: function () {
         return (
             React.createElement("form", {className: "blogForm"}, 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?"})
+                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?", onChange: this.handleChange})
                 ), 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", onChange: this.handleChange})
+                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation"})
                 ), 
                 React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
             )
@@ -98,11 +88,6 @@ var Why = React.createClass({displayName: "Why",
             blogs: this.state.blogs
         });
     },
-    handleBlogFromChange: function(content) {
-        this.setState({
-            content: content
-        });
-    },
     getInitialState: function () {
         return {
             blogs: [],
@@ -136,8 +121,8 @@ var Why = React.createClass({displayName: "Why",
 			React.createElement("div", {className: "why"}, 
 				React.createElement("h1", null, "WHY BLOG"), 
                 React.createElement("hr", null), 
-                React.createElement(BlogForm, {handleBlogFromChange: this.handleBlogFromChange}), 
-                this.state.content ? React.createElement(BlogMarked, {content: this.state.content}) : null, 
+                React.createElement(BlogForm, null), 
+                React.createElement(BlogMarked, {content: this.state.content}), 
                 React.createElement(Blogs, {blogs: this.state.blogs, hanldeBlogClick: this.hanldeBlogClick})
 			)
 		);
