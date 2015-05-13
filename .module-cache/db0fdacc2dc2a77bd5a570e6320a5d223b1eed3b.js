@@ -15,8 +15,15 @@ var BlogForm = React.createClass({displayName: "BlogForm",
 });
 
 var Blog = React.createClass({displayName: "Blog",
-    handleClick: function () {
-        this.props.hanldeBlogClick(this);
+    getInitialState: function () {
+        return {
+            contentState: false
+        };
+    },
+    handleClick: function (e) {
+        this.setState({
+            contentState: true
+        });
     },
     render: function () {
        var contentSplit = this.props.blog.content.split("\n");
@@ -27,19 +34,12 @@ var Blog = React.createClass({displayName: "Blog",
        }
 
        return (
-           React.createElement("div", {className: "blog", onClick: this.handleClick}, 
-               this.props.blog.contentState ?
-                   React.createElement("div", {className: "title active"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
-                       React.createElement("img", {src: "static/img/up.png", className: "pull-right"})
-                   )
-                   :
-                   React.createElement("div", {className: "title"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
-                       React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
-                   ), 
-               
-               this.props.blog.contentState ?
+           React.createElement("div", {className: "blog"}, 
+               React.createElement("div", {className: "title"}, 
+                   React.createElement("b", null, this.props.blog.title), 
+                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
+               ), 
+               this.state.contentState ?
                    React.createElement("div", {className: "content"}, 
                        React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
                    )
@@ -53,10 +53,9 @@ var Blog = React.createClass({displayName: "Blog",
 
 var Blogs = React.createClass({displayName: "Blogs",
     render: function () {
-        var hanldeBlogClick = this.props.hanldeBlogClick;
         var blogs = this.props.blogs.map(function (blog) {
             return (
-                React.createElement(Blog, {blog: blog, hanldeBlogClick: hanldeBlogClick})
+                React.createElement(Blog, {blog: blog})
             );
         });
         return (
@@ -68,12 +67,6 @@ var Blogs = React.createClass({displayName: "Blogs",
 });
 
 var Why = React.createClass({displayName: "Why",
-    hanldeBlogClick: function (blog) {
-        this.state.blogs[blog.props.blog.id]["contentState"] = !blog.props.blog.contentState;
-        this.setState({
-            blogs: this.state.blogs
-        });
-    },
     getInitialState: function () {
         return {
             blogs: []
@@ -85,10 +78,6 @@ var Why = React.createClass({displayName: "Why",
             dataType: 'json',
             cache: false,
             success: function (data) {
-                for (i in data) {
-                    data[i]["contentState"] = false;
-                    data[i]["id"] = i;
-                }
                 this.setState({
                     blogs: data
                 });
@@ -107,7 +96,7 @@ var Why = React.createClass({displayName: "Why",
 				React.createElement("h1", null, "WHY BLOG"), 
                 React.createElement("hr", null), 
                 React.createElement(BlogForm, null), 
-                React.createElement(Blogs, {blogs: this.state.blogs, hanldeBlogClick: this.hanldeBlogClick})
+                React.createElement(Blogs, {blogs: this.state.blogs})
 			)
 		);
 	}

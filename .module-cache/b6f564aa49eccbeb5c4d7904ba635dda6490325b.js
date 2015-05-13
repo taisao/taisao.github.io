@@ -30,12 +30,12 @@ var Blog = React.createClass({displayName: "Blog",
            React.createElement("div", {className: "blog", onClick: this.handleClick}, 
                this.props.blog.contentState ?
                    React.createElement("div", {className: "title active"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
+                       React.createElement("b", null, this.props.blog.title), 
                        React.createElement("img", {src: "static/img/up.png", className: "pull-right"})
                    )
                    :
                    React.createElement("div", {className: "title"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
+                       React.createElement("b", null, this.props.blog.title), 
                        React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
                    ), 
                

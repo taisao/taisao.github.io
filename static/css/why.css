@@ -18,6 +18,10 @@ hr {
     border-color: #404040;
 }
 
+b::selection {
+    background: none;
+}
+
 h1 {
     font-size: 25px;
     font-weight: bold;
@@ -46,12 +50,6 @@ h2 {
     cursor: pointer;
 }
 
-.content {
-    /*display: none;*/
-}
-
-.v-icon {
-    font-size: 18px;
-    font-stretch: expanded;
-    width: 100%;
+.active {
+    background-color: lightgreen;
 }

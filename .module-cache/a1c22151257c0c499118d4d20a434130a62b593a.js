@@ -28,17 +28,10 @@ var Blog = React.createClass({displayName: "Blog",
 
        return (
            React.createElement("div", {className: "blog", onClick: this.handleClick}, 
-               this.props.blog.contentState ?
-                   React.createElement("div", {className: "title active"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
-                       React.createElement("img", {src: "static/img/up.png", className: "pull-right"})
-                   )
-                   :
-                   React.createElement("div", {className: "title"}, 
-                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
-                       React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
-                   ), 
-               
+               React.createElement("div", {className: "title"}, 
+                   React.createElement("b", null, this.props.blog.title), 
+                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
+               ), 
                this.props.blog.contentState ?
                    React.createElement("div", {className: "content"}, 
                        React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
@@ -69,10 +62,7 @@ var Blogs = React.createClass({displayName: "Blogs",
 
 var Why = React.createClass({displayName: "Why",
     hanldeBlogClick: function (blog) {
-        this.state.blogs[blog.props.blog.id]["contentState"] = !blog.props.blog.contentState;
-        this.setState({
-            blogs: this.state.blogs
-        });
+        alert(blog.props.blog.title);
     },
     getInitialState: function () {
         return {
@@ -86,8 +76,7 @@ var Why = React.createClass({displayName: "Why",
             cache: false,
             success: function (data) {
                 for (i in data) {
-                    data[i]["contentState"] = false;
-                    data[i]["id"] = i;
+                    data[i]["contentState"] = false
                 }
                 this.setState({
                     blogs: data
