@@ -3,14 +3,31 @@
 <head>
 	<title>Why Page</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.jpg"/>
+
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+    <link type="text/css" rel="stylesheet" href="static/css/why.css">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.2/react-with-addons.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
 	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.2/JSXTransformer.js"></script>-->
 </head>
 <body>
-    <div id="why"></div>
+    <div id="why" class="container"></div>
 	<script src="why.js"></script>
     <!--<script type="text/jsx" src="why.js"></script>-->
+
+    <script>
+        var tee = function () {
+            $(".title").click(function () {
+                alert("fuu");
+                $(this).children(".content").hidden();
+            });
+        };
+
+        $(document).ready(tee);
+    </script>
 </body>
 </html>

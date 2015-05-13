@@ -8,7 +8,9 @@ var BlogForm = React.createClass({displayName: "BlogForm",
                 React.createElement("div", {className: "form-group"}, 
                     React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation"})
                 ), 
-                React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
+                React.createElement("div", {className: "clear"}, 
+                    React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
+                )
             )
         );
     }
@@ -25,13 +27,8 @@ var Blog = React.createClass({displayName: "Blog",
 
        return (
            React.createElement("div", {className: "blog"}, 
-               React.createElement("div", {className: "title"}, 
-                   React.createElement("b", null, this.props.blog.title), 
-                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
-               ), 
-               React.createElement("div", {className: "content"}, 
-                   React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
-               )
+               React.createElement("h2", null, this.props.blog.title), 
+               React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
            )
        );
    }
@@ -82,6 +79,7 @@ var Why = React.createClass({displayName: "Why",
 				React.createElement("h1", null, "WHY BLOG"), 
                 React.createElement("hr", null), 
                 React.createElement(BlogForm, null), 
+                React.createElement("hr", null), 
                 React.createElement(Blogs, {blogs: this.state.blogs})
 			)
 		);

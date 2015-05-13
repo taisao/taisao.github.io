@@ -27,7 +27,7 @@ var Blog = React.createClass({displayName: "Blog",
            React.createElement("div", {className: "blog"}, 
                React.createElement("div", {className: "title"}, 
                    React.createElement("b", null, this.props.blog.title), 
-                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
+                   React.createElement("span", {className: "v-icon pull-right"}, "")
                ), 
                React.createElement("div", {className: "content"}, 
                    React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})

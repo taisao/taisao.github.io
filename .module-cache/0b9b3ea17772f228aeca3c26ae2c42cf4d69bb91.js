@@ -1,3 +1,8 @@
+var tee = function () {
+    
+}
+$(docment).ready(tee);
+
 var BlogForm = React.createClass({displayName: "BlogForm",
     render: function () {
         return (

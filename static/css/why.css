@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #eee;
+    font-family: sans-serif;
+    color: #404040;
+}
+
+.container {
+    width: 800px;
+    margin-top: 20px;
+}
+
+hr {
+    border-color: #404040;
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.blogs {
+    margin-top: 20px;
+}
+
+.title {
+    display: block;
+    background-color: white;
+    height: 60px;
+    padding: 20px;
+    border-bottom: 1px solid lightsteelblue;
+}
+
+.title:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.content {
+    /*display: none;*/
+}
+
+.v-icon {
+    font-size: 18px;
+    font-stretch: expanded;
+    width: 100%;
+}

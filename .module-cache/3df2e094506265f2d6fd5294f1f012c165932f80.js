@@ -1,14 +1,13 @@
 var BlogForm = React.createClass({displayName: "BlogForm",
     render: function () {
         return (
-            React.createElement("form", {className: "blogForm"}, 
-                React.createElement("div", {className: "form-group"}, 
-                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?"})
+            React.createElement("form", {class: "blogForm"}, 
+                React.createElement("div", {class: "from-group"}, 
+                    React.createElement("input", {type: "text", ref: "title", placeholder: "Say why?"}), 
+                    React.createElement("textarea", {ref: "content", placeholder: "Explanation"})
                 ), 
-                React.createElement("div", {className: "form-group"}, 
-                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation"})
-                ), 
-                React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
+
+                React.createElement("input", {type: "submit"})
             )
         );
     }
@@ -25,13 +24,8 @@ var Blog = React.createClass({displayName: "Blog",
 
        return (
            React.createElement("div", {className: "blog"}, 
-               React.createElement("div", {className: "title"}, 
-                   React.createElement("b", null, this.props.blog.title), 
-                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
-               ), 
-               React.createElement("div", {className: "content"}, 
-                   React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
-               )
+               React.createElement("h2", null, this.props.blog.title), 
+               React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
            )
        );
    }
@@ -79,8 +73,7 @@ var Why = React.createClass({displayName: "Why",
 	render: function () {
 		return (
 			React.createElement("div", {className: "why"}, 
-				React.createElement("h1", null, "WHY BLOG"), 
-                React.createElement("hr", null), 
+				React.createElement("h1", null, "Why Blog"), 
                 React.createElement(BlogForm, null), 
                 React.createElement(Blogs, {blogs: this.state.blogs})
 			)
@@ -89,7 +82,6 @@ var Why = React.createClass({displayName: "Why",
 });
 
 React.render(
-	React.createElement(Why, {url: "data.json"}),
-//	<Why url="http://my-aetitud.rhcloud.com/api/tee/" />,
+	React.createElement(Why, {url: "http://my-aetitud.rhcloud.com/api/tee/"}),
 	document.getElementById("why")
 );

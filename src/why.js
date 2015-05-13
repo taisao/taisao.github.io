@@ -1,10 +1,14 @@
 var BlogForm = React.createClass({
     render: function () {
         return (
-            <form class="blogForm">
-                <input type="text" ref="title" />
-                <textarea ref="content"></textarea>
-                <input type="submit" />
+            <form className="blogForm">
+                <div className="form-group">
+                    <input className="form-control" type="text" ref="title" placeholder="Why?" />
+                </div>
+                <div className="form-group">
+                    <textarea className="form-control" ref="content" placeholder="Explanation"></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary">Say</button>
             </form>
         );
     }
@@ -21,8 +25,13 @@ var Blog = React.createClass({
 
        return (
            <div className="blog">
-               <h2>{this.props.blog.title}</h2>
-               <span dangerouslySetInnerHTML={{__html: contentMarkup}}></span>
+               <div className="title">
+                   <b>{this.props.blog.title}</b>
+                   <img src="static/img/down.png" className="pull-right" />
+               </div>
+               <div className="content">
+                   <span dangerouslySetInnerHTML={{__html: contentMarkup}}></span>
+               </div>
            </div>
        );
    }
@@ -70,7 +79,8 @@ var Why = React.createClass({
 	render: function () {
 		return (
 			<div className="why">
-				<h1>Why Blog</h1>
+				<h1>WHY BLOG</h1>
+                <hr />
                 <BlogForm />
                 <Blogs blogs={this.state.blogs} />
 			</div>
@@ -79,6 +89,7 @@ var Why = React.createClass({
 });
 
 React.render(
-	<Why url="http://my-aetitud.rhcloud.com/api/tee/" />,
+	<Why url="data.json" />,
+//	<Why url="http://my-aetitud.rhcloud.com/api/tee/" />,
 	document.getElementById("why")
 );

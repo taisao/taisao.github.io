@@ -1,7 +1,7 @@
 var BlogForm = React.createClass({displayName: "BlogForm",
     render: function () {
         return (
-            React.createElement("form", {className: "blogForm"}, 
+            React.createElement("form", {className: "blogForm clear"}, 
                 React.createElement("div", {className: "form-group"}, 
                     React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?"})
                 ), 
@@ -25,13 +25,8 @@ var Blog = React.createClass({displayName: "Blog",
 
        return (
            React.createElement("div", {className: "blog"}, 
-               React.createElement("div", {className: "title"}, 
-                   React.createElement("b", null, this.props.blog.title), 
-                   React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
-               ), 
-               React.createElement("div", {className: "content"}, 
-                   React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
-               )
+               React.createElement("h2", null, this.props.blog.title), 
+               React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
            )
        );
    }

@@ -1,3 +1,12 @@
+var tee = function () {
+    $(".title").click(function () {
+        alert("fuu");
+        $(this).children(".content").hidden();
+    });
+}
+
+$(document).ready(tee);
+
 var BlogForm = React.createClass({displayName: "BlogForm",
     render: function () {
         return (
