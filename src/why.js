@@ -146,6 +146,6 @@ var Why = React.createClass({
 
 React.render(
 //	<Why url="data.json" />,
-	<Why url="http://my-aetitud.rhcloud.com/api/blogs/" />,
+	<Why url="http://my-aetitud.rhcloud.com/api/blogs/?format=json" />,
 	document.getElementById("why")
 );
