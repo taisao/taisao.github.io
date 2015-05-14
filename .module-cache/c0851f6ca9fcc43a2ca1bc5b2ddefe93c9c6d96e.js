@@ -1,24 +1,24 @@
-var BlogMarked = React.createClass({
+var BlogMarked = React.createClass({displayName: "BlogMarked",
     render: function () {
         var contentSplit = this.props.content.split("\n");
         var lines = contentSplit.map(function(line) {
             if (line) {
-                return <span dangerouslySetInnerHTML={{__html: marked(line, {sanitized: false})}}></span>;
+                return React.createElement("span", {dangerouslySetInnerHTML: {__html: marked(line, {sanitized: false})}});
             } else {
-                return <br />;
+                return React.createElement("br", null);
             }
 
         });
 
         return (
-            <div className="blogMarked">
-                {lines}
-            </div>
+            React.createElement("div", {className: "blogMarked"}, 
+                lines
+            )
         );
     }
 });
 
-var BlogForm = React.createClass({
+var BlogForm = React.createClass({displayName: "BlogForm",
     handleTitleChange: function (e) {
         var title = e.target.value;
         this.props.handleBlogFromTitleChange(title);
@@ -32,20 +32,20 @@ var BlogForm = React.createClass({
     },
     render: function () {
         return (
-            <form className="blogForm" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <input className="form-control" type="text" ref="title" placeholder="Why?" value={this.props.title} onChange={this.handleTitleChange} />
-                </div>
-                <div className="form-group">
-                    <textarea className="form-control" ref="content" placeholder="Explanation (Markdown)" value={this.props.content} onChange={this.handleContentChange}></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Say</button>
-            </form>
+            React.createElement("form", {className: "blogForm", onSubmit: this.handleSubmit}, 
+                React.createElement("div", {className: "form-group"}, 
+                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?", value: this.props.title, onChange: this.handleTitleChange})
+                ), 
+                React.createElement("div", {className: "form-group"}, 
+                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", value: this.props.content, onChange: this.handleContentChange})
+                ), 
+                React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
+            )
         );
     }
 });
 
-var Blog = React.createClass({
+var Blog = React.createClass({displayName: "Blog",
     handleClick: function () {
         this.props.hanldeBlogClick(this);
     },
@@ -58,47 +58,47 @@ var Blog = React.createClass({
        }
 
        return (
-           <div className="blog">
-               {this.props.blog.contentState ?
-                   <div className="title active" onClick={this.handleClick}>
-                       <b className="pull-left">{this.props.blog.title}</b>
-                       <img src="static/img/up.png" className="pull-right" />
-                   </div>
+           React.createElement("div", {className: "blog"}, 
+               this.props.blog.contentState ?
+                   React.createElement("div", {className: "title active", onClick: this.handleClick}, 
+                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
+                       React.createElement("img", {src: "static/img/up.png", className: "pull-right"})
+                   )
                    :
-                   <div className="title" onClick={this.handleClick}>
-                       <b className="pull-left">{this.props.blog.title}</b>
-                       <img src="static/img/down.png" className="pull-right" />
-                   </div>
-               }
-               {this.props.blog.contentState ?
-                   <div className="content">
-                       <span dangerouslySetInnerHTML={{__html: contentMarkup}}></span>
-                   </div>
+                   React.createElement("div", {className: "title", onClick: this.handleClick}, 
+                       React.createElement("b", {className: "pull-left"}, this.props.blog.title), 
+                       React.createElement("img", {src: "static/img/down.png", className: "pull-right"})
+                   ), 
+               
+               this.props.blog.contentState ?
+                   React.createElement("div", {className: "content"}, 
+                       React.createElement("span", {dangerouslySetInnerHTML: {__html: contentMarkup}})
+                   )
                    :
                    null
-               }
-           </div>
+               
+           )
        );
     }
 });
 
-var Blogs = React.createClass({
+var Blogs = React.createClass({displayName: "Blogs",
     render: function () {
         var hanldeBlogClick = this.props.hanldeBlogClick;
         var blogs = this.props.blogs.map(function (blog) {
             return (
-                <Blog blog={blog} hanldeBlogClick={hanldeBlogClick} />
+                React.createElement(Blog, {blog: blog, hanldeBlogClick: hanldeBlogClick})
             );
         });
         return (
-            <div className="blogs">
-                {blogs}
-            </div>
+            React.createElement("div", {className: "blogs"}, 
+                blogs
+            )
         );
     }
 });
 
-var Why = React.createClass({
+var Why = React.createClass({displayName: "Why",
     hanldeBlogClick: function (blog) {
         this.state.blogs[blog.props.blog.id]["contentState"] = !blog.props.blog.contentState;
         this.setState({
@@ -138,12 +138,11 @@ var Why = React.createClass({
             data: {title: this.state.title, content: this.state.content, date: "2015-05-14"},
             success: function (data) {
                 var blogs = this.state.blogs.reverse().concat([data]);
-                blogs.reverse();
                 for (i in blogs) {
                     blogs[i]["id"] = i;
                 }
                 this.setState({
-                    blogs: blogs
+                    blogs: blogs.reverse()
                 });
             }.bind(this),
             error: function (xhr, state, err) {
@@ -176,23 +175,23 @@ var Why = React.createClass({
     },
 	render: function () {
 		return (
-			<div className="why">
-				<h1>WHY BLOG</h1>
-                <hr />
-                <BlogForm handleBlogFromContentChange={this.handleBlogFromContentChange}
-                          handleBlogFromTitleChange={this.handleBlogFromTitleChange}
-                          handleSubmit={this.handleSubmit}
-                          title={this.state.title}
-                          content={this.state.content} />
-                {this.state.content ? <BlogMarked content={this.state.content} /> : null}
-                <Blogs blogs={this.state.blogs} hanldeBlogClick={this.hanldeBlogClick} />
-			</div>
+			React.createElement("div", {className: "why"}, 
+				React.createElement("h1", null, "WHY BLOG"), 
+                React.createElement("hr", null), 
+                React.createElement(BlogForm, {handleBlogFromContentChange: this.handleBlogFromContentChange, 
+                          handleBlogFromTitleChange: this.handleBlogFromTitleChange, 
+                          handleSubmit: this.handleSubmit, 
+                          title: this.state.title, 
+                          content: this.state.content}), 
+                this.state.content ? React.createElement(BlogMarked, {content: this.state.content}) : null, 
+                React.createElement(Blogs, {blogs: this.state.blogs, hanldeBlogClick: this.hanldeBlogClick})
+			)
 		);
 	}
 });
 
 React.render(
 //	<Why url="data.json" />,
-	<Why url="http://my-aetitud.rhcloud.com/api/blogs/?format=json" />,
+	React.createElement(Why, {url: "http://my-aetitud.rhcloud.com/api/blogs/?format=json"}),
 	document.getElementById("why")
 );

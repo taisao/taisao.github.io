@@ -27,19 +27,19 @@ var BlogForm = React.createClass({displayName: "BlogForm",
         var content = e.target.value;
         this.props.handleBlogFromContentChange(content);
     },
-    handleSubmit: function (e) {
-        this.props.handleSubmit(e);
+    handleSubmit: function () {
+        this.props.handleSubmit();
     },
     render: function () {
         return (
-            React.createElement("form", {className: "blogForm", onSubmit: this.handleSubmit}, 
+            React.createElement("form", {className: "blogForm"}, 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?", value: this.props.title, onChange: this.handleTitleChange})
+                    React.createElement("input", {className: "form-control", type: "text", ref: "title", placeholder: "Why?", onChange: this.handleTitleChange})
                 ), 
                 React.createElement("div", {className: "form-group"}, 
-                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", value: this.props.content, onChange: this.handleContentChange})
+                    React.createElement("textarea", {className: "form-control", ref: "content", placeholder: "Explanation (Markdown)", onChange: this.handleContentChange})
                 ), 
-                React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Say")
+                React.createElement("button", {type: "submit", className: "btn btn-primary", onSubmit: this.handleSubmit}, "Say")
             )
         );
     }
@@ -117,11 +117,8 @@ var Why = React.createClass({displayName: "Why",
     },
     handleSubmit: function (e) {
         e.preventDefault();
+        alert("sa");
         this.putDataToServer();
-        this.setState({
-            title: '',
-            content: ''
-        });
     },
     getInitialState: function () {
         return {
@@ -135,15 +132,15 @@ var Why = React.createClass({displayName: "Why",
             url: this.props.url,
             dataType: 'json',
             type: 'POST',
-            data: {title: this.state.title, content: this.state.content, date: "2015-05-14"},
+            data: {title: this.state.title, content: this.state.content, date: Date.now()},
             success: function (data) {
-                var blogs = this.state.blogs.reverse().concat([data]);
-                blogs.reverse();
-                for (i in blogs) {
-                    blogs[i]["id"] = i;
+                var result = data["results"];
+                for (i in result) {
+                    result[i]["contentState"] = false;
+                    result[i]["id"] = i;
                 }
                 this.setState({
-                    blogs: blogs
+                    blogs: result
                 });
             }.bind(this),
             error: function (xhr, state, err) {
@@ -157,13 +154,13 @@ var Why = React.createClass({displayName: "Why",
             dataType: 'json',
             cache: false,
             success: function (data) {
-                var blogs = data["results"].reverse();
-                for (i in blogs) {
-                    blogs[i]["contentState"] = false;
-                    blogs[i]["id"] = i;
+                var result = data["results"];
+                for (i in result) {
+                    result[i]["contentState"] = false;
+                    result[i]["id"] = i;
                 }
                 this.setState({
-                    blogs: blogs
+                    blogs: result
                 });
             }.bind(this),
             error: function (xhr, state, err) {
@@ -179,11 +176,7 @@ var Why = React.createClass({displayName: "Why",
 			React.createElement("div", {className: "why"}, 
 				React.createElement("h1", null, "WHY BLOG"), 
                 React.createElement("hr", null), 
-                React.createElement(BlogForm, {handleBlogFromContentChange: this.handleBlogFromContentChange, 
-                          handleBlogFromTitleChange: this.handleBlogFromTitleChange, 
-                          handleSubmit: this.handleSubmit, 
-                          title: this.state.title, 
-                          content: this.state.content}), 
+                React.createElement(BlogForm, {handleBlogFromContentChange: this.handleBlogFromContentChange, handleBlogFromTitleChange: this.handleBlogFromTitleChange, handleSubmit: this.handleSubmit}), 
                 this.state.content ? React.createElement(BlogMarked, {content: this.state.content}) : null, 
                 React.createElement(Blogs, {blogs: this.state.blogs, hanldeBlogClick: this.hanldeBlogClick})
 			)

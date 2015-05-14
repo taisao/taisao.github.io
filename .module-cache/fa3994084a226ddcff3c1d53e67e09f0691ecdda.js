@@ -137,13 +137,10 @@ var Why = React.createClass({displayName: "Why",
             type: 'POST',
             data: {title: this.state.title, content: this.state.content, date: "2015-05-14"},
             success: function (data) {
-                var blogs = this.state.blogs.reverse().concat([data]);
-                blogs.reverse();
-                for (i in blogs) {
-                    blogs[i]["id"] = i;
-                }
+                data["contentState"] = false;
+                data["id"] = this.state.blogs.length;
                 this.setState({
-                    blogs: blogs
+                    blogs: this.state.blogs.concat([data]).reverse()
                 });
             }.bind(this),
             error: function (xhr, state, err) {
@@ -157,13 +154,13 @@ var Why = React.createClass({displayName: "Why",
             dataType: 'json',
             cache: false,
             success: function (data) {
-                var blogs = data["results"].reverse();
-                for (i in blogs) {
-                    blogs[i]["contentState"] = false;
-                    blogs[i]["id"] = i;
+                var result = data["results"].reverse();
+                for (i in result) {
+                    result[i]["contentState"] = false;
+                    result[i]["id"] = i;
                 }
                 this.setState({
-                    blogs: blogs
+                    blogs: result
                 });
             }.bind(this),
             error: function (xhr, state, err) {
