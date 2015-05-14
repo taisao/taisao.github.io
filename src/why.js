@@ -116,11 +116,11 @@ var Why = React.createClass({
             cache: false,
             success: function (data) {
                 for (i in data) {
-                    data[i]["contentState"] = false;
-                    data[i]["id"] = i;
+                    data["results"][i]["contentState"] = false;
+                    data["results"][i]["id"] = i;
                 }
                 this.setState({
-                    blogs: data
+                    blogs: data["results"]
                 });
             }.bind(this),
             error: function (xhr, state, err) {
@@ -145,7 +145,7 @@ var Why = React.createClass({
 });
 
 React.render(
-	<Why url="data.json" />,
-//	<Why url="http://my-aetitud.rhcloud.com/api/tee/" />,
+//	<Why url="data.json" />,
+	<Why url="http://my-aetitud.rhcloud.com/api/blogs/" />,
 	document.getElementById("why")
 );

@@ -116,8 +116,8 @@ var Why = React.createClass({displayName: "Why",
             cache: false,
             success: function (data) {
                 for (i in data) {
-                    data["results"][i]["contentState"] = false;
-                    data["results"][i]["id"] = i;
+                    data[i]["contentState"] = false;
+                    data[i]["id"] = i;
                 }
                 this.setState({
                     blogs: data["results"]
