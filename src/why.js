@@ -115,12 +115,13 @@ var Why = React.createClass({
             dataType: 'json',
             cache: false,
             success: function (data) {
-                for (i in data) {
-                    data["results"][i]["contentState"] = false;
-                    data["results"][i]["id"] = i;
+                var result = data["results"];
+                for (i in result) {
+                    result[i]["contentState"] = false;
+                    result[i]["id"] = i;
                 }
                 this.setState({
-                    blogs: data["results"]
+                    blogs: result
                 });
             }.bind(this),
             error: function (xhr, state, err) {
