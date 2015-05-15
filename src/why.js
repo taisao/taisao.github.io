@@ -135,7 +135,7 @@ var Why = React.createClass({
             url: this.props.url,
             dataType: 'json',
             type: 'POST',
-            data: {title: this.state.title, content: this.state.content, date: "2015-05-14"},
+            data: {title: this.state.title, content: this.state.content, date: new Date(new Date().getTime() + 7*60*60*1000).toJSON().slice(0,10)},
             success: function (data) {
                 var blogs = this.state.blogs.reverse().concat([data]);
                 blogs.reverse();
